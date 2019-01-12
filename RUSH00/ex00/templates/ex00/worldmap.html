@@ -1,0 +1,21 @@
+{% extends "ex00/base.html" %}
+
+{% block title %}
+Worldmap
+{% endblock %}
+
+{% block style %}
+{% load static %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'ex01/style2.css' %}" /> -->
+{% endblock %}
+
+
+{% block content %}
+{% verbatim myblock %}
+Il faut afficher ici la Worldmap
+Avant d’afficher celle-ci, le fichier contenant les informations de la partie en cours doit être réinitialisé avec les paramêtres des Settings et les Moviemons doivent être requêtés à nouveau.
+
+{% endverbatim myblock %}
+{% endblock %}
+
+

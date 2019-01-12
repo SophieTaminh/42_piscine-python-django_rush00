@@ -1,0 +1,21 @@
+{% extends "ex00/base.html" %}
+
+{% block title %}
+TitleScreen
+{% endblock %}
+
+{% block style %}
+{% load static %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'ex01/style2.css' %}" /> -->
+{% endblock %}
+
+{% block content %}
+{% verbatim myblock %}
+
+<div>
+    <button type="button"><a href="/ex00/worldmap">A - New Game</a></button>
+    <button type="button"><a href="/ex00/option/load">B - Load</a></button>
+</div>
+
+{% endverbatim myblock %}
+{% endblock %}

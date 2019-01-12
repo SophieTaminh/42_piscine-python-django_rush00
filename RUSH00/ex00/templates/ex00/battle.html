@@ -1,0 +1,21 @@
+{% extends "ex00/base.html" %}
+
+{% block title %}
+Battle
+{% endblock %}
+
+{% block style %}
+{% load static %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'ex01/style2.css' %}" /> -->
+{% endblock %}
+
+
+{% block content %}
+{% verbatim myblock %}
+
+Essayez de capturer le Moviemon que vous avez débusqué !
+
+{% endverbatim myblock %}
+{% endblock %}
+
+
