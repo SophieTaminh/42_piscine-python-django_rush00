@@ -11,11 +11,32 @@ Worldmap
 
 
 {% block content %}
-{% verbatim myblock %}
-Il faut afficher ici la Worldmap
-Avant d’afficher celle-ci, le fichier contenant les informations de la partie en cours doit être réinitialisé avec les paramêtres des Settings et les Moviemons doivent être requêtés à nouveau.
 
-{% endverbatim myblock %}
+<div id="console">
+        Ecran:
+        <div id="ecran">
+            <div>A - if Moviemon Battle</div>
+            <div>B - (rien)</div>
+            <div class="explain">
+            Il faut afficher ici la Worldmap<br>
+            {% for x in grid %}
+                {% for y in x %}
+                <span class="square">{{y}}</span> 
+                {% endfor %}  
+                <br>
+            {% endfor %}
+            Avant d’afficher celle-ci, le fichier contenant les informations 
+            de la partie en cours doit être réinitialisé avec les paramêtres 
+            des Settings et les Moviemons doivent être requêtés à nouveau.
+            </div>  
+        </div>
+        Controles:
+        <div id="controles">
+            <a href="/ex00/worldmap">A</a>
+            <a href="/ex00/option/load">B</a>
+        </div>
+    </div>
+
 {% endblock %}
 
 

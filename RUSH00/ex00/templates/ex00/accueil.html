@@ -12,9 +12,17 @@ TitleScreen
 {% block content %}
 {% verbatim myblock %}
 
-<div>
-    <button type="button"><a href="/ex00/worldmap">A - New Game</a></button>
-    <button type="button"><a href="/ex00/option/load">B - Load</a></button>
+<div id="console">
+    Ecran:
+    <div id="ecran">
+        <div>A - New Game</div>
+        <div>B - Load</div>
+    </div>
+    Controles:
+    <div id="controles">
+        <a href="/ex00/worldmap">A</a>
+        <a href="/ex00/option/load">B</a>
+    </div>
 </div>
 
 {% endverbatim myblock %}

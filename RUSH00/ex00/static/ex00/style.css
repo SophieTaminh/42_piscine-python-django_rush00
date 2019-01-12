@@ -1,3 +1,23 @@
-* {
-    color:red;
+body {
+    text-align: center;
+    font-size: 4vw;
+}
+#console {
+    width: 50vw;
+    height: 60vw;
+    border: 1px solid lightgray;
+}
+#ecran {
+    height: 45vw;
+    border: 1px solid green;
+    font-size: 3vw;
+}
+#controles {
+    border: 1px solid red;
+}
+.explain {
+    font-size: 2vw;
+}
+.square {
+    font-size: 2vw;
 }
