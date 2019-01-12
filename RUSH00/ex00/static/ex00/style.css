@@ -14,10 +14,11 @@ body {
 }
 #controles {
     border: 1px solid red;
+    font-size: 3vw;
 }
 .explain {
     font-size: 2vw;
 }
 .square {
-    font-size: 2vw;
+    font-size: 2.5vw;
 }

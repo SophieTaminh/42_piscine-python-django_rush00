@@ -126,7 +126,10 @@ MOVIEMON_SETTINGS = [
             'height' : 10,
             'width' : 10
         },
-        'position_start' : 0,
+        'position_start' : {
+            'x' : 0,
+            'y' : 3
+        },
         'IMDB_title' : {
             0 : "True Grit",
             1 : "Sinbad: The Fifth Voyage",
