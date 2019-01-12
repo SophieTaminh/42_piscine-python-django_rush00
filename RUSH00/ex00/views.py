@@ -21,8 +21,10 @@ def make_grid(width, position):
 
 def worldmap(request):
 	print("hey new game?")
-	width = 5
-	position = { 'x' : 3, 'y' : 3 }
+	settings = getInfo.moviemon()
+	settings.load_default_settings()
+	width = settings.grid_size['width']
+	position = settings.position
 	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width,position) })
 
 def battle(request):
