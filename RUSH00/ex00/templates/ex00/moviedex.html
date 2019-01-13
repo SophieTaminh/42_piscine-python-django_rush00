@@ -11,9 +11,17 @@ Moviedex
 
 
 {% block content %}
-{% verbatim myblock %}
+
 Liste des Moviemons capturés. Il doit être possible de sélectionner un film pour accéder aux détails de celui-ci.
-{% endverbatim myblock %}
+
+{% for moviemon in moviedex%}
+<br>
+<img src={{moviemon.poster}} alt="moviemon" height="250" width="250">
+<br>
+{% endfor %}
+<button><a href="/worldmap" title="Wordlmap">Select</a></button>
+<button><a href="/" title="MovieDetail">A</a></button>
+
 {% endblock %}
 
 

@@ -115,7 +115,10 @@ def battle(request, id):
 	return render(request, "ex00/battle.html", {"message" : message, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id})
 
 def moviedex(request):
-	return render(request, "ex00/moviedex.html")
+	settings = getInfo.moviemon()
+	game = settings.dump()
+	moviedex = game.moviedex
+	return render(request, "ex00/moviedex.html", {"moviedex" : moviedex})
 
 def options(request):
 	return render(request, "ex00/options.html")
