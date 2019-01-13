@@ -11,11 +11,24 @@ Battle
 
 
 {% block content %}
-{% verbatim myblock %}
-
 Essayez de capturer le Moviemon que vous avez débusqué !
+{% if alerteNoob %}
+    HANNNNN UN NOOB
+{% endif %}
+<br>
+Nom du moviemon : {{moviemonABattre.nom}}
+<br>
+Force du moviemon : {{moviemonABattre.rating}}
+<br>
+<img src={{moviemonABattre.poster}} alt="moviemon" height="500" width="500">
+<br>
+Nombre de movieBalls en stock : {{nombreMovieballs}}
+<br>
 
-{% endverbatim myblock %}
+<button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button>
+<button>B</button>
+    
+
 {% endblock %}
 
 

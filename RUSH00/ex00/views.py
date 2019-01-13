@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import getInfo
+import os
 
 # Create your views here.
 
@@ -57,13 +58,25 @@ def worldmap(request):
 			settings.position['y'] = position['y'] + 1
 			settings.saveTMP()
 		return(redirect("/worldmap"))
+<<<<<<< Updated upstream
 	from random import randint
 	print(randint(0, 1))
 	settings.saveTMP()
 	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position), 'found': 0 })
+=======
+	settings.saveTMP()
+
+	test = settings.dump()
+	print(test.position)
+	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position) })
+>>>>>>> Stashed changes
 
 def battle(request, id):
 	print("battle!", id)
+	settings = getInfo.moviemon()
+	tmp = settings.dump()
+	print(tmp.position)
+
 	return render(request, "ex00/battle.html")
 
 def moviedex(request):
@@ -73,7 +86,77 @@ def options(request):
 	return render(request, "ex00/options.html")
 
 def options_load_game(request):
-	return render(request, "ex00/options_load_game.html")
+	print("load_game")
+	settings = getInfo.moviemon()
+	listeFichiers = os.listdir("saved_game/")
+	listeGame = []
+	for fichiers in listeFichiers:
+		if (fichiers != "mypicklefile.txt"):
+			listeGame.append(fichiers)
+	print(listeGame)
+	slota = False
+	slotb = False
+	slotc = False
+	gameSplitA = 0
+	gameSplitB = 0
+	gameSplitC = 0
+	for game in listeGame:
+		if ("slota" in game):
+			slota = True
+			gameSplit = game.split("_")
+			gameSplitA = gameSplit[1]
+		if ("slotb" in game):
+			slotb = True
+			gameSplit = game.split("_")
+			gameSplitB = gameSplit[1]
+		if ("slotc" in game):
+			slotc = True
+			gameSplit = game.split("_")
+			gameSplitC = gameSplit[1]
+	return render(request, "ex00/options_load_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC})
 
 def options_save_game(request):
-	return render(request, "ex00/options_save_game.html")
+	print("save_game")
+	settings = getInfo.moviemon()
+	tmp = settings.dump()
+	listeFichiers = os.listdir("saved_game/")
+	listeGame = []
+	for fichiers in listeFichiers:
+		if (fichiers != "mypicklefile.txt"):
+			listeGame.append(fichiers)
+	print(listeGame)
+	slota = False
+	slotb = False
+	slotc = False
+	gameSplitA = 0
+	gameSplitB = 0
+	gameSplitC = 0
+	for game in listeGame:
+		if ("slota" in game):
+			slota = True
+			gameSplit = game.split("_")
+			gameSplitA = gameSplit[1]
+		if ("slotb" in game):
+			slotb = True
+			gameSplit = game.split("_")
+			gameSplitB = gameSplit[1]
+		if ("slotc" in game):
+			slotc = True
+			gameSplit = game.split("_")
+			gameSplitC = gameSplit[1]
+	nomSlot = request.GET.get('slot')
+	NiveauMax = 10
+	NiveauActuel = len(tmp.moviedex)
+	if (nomSlot):
+		saveName = "slot"+ nomSlot.lower() + "_" + str(NiveauActuel) + "_10.mmg"
+		if ("slota" in saveName):
+			commandeEffacer = os.system("rm -f saved_game/slota*")
+			tmp.save(fileName = saveName)
+		if ("slotb" in saveName):
+			commandeEffacer = os.system("rm -f saved_game/slotb*")
+			tmp.save(fileName = saveName)
+		if ("slotc" in saveName):
+			commandeEffacer = os.system("rm -f saved_game/slotc*")
+			tmp.save(fileName = saveName)
+	return render(request, "ex00/options_save_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC})
+

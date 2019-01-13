@@ -14,12 +14,52 @@ Load
 {{test}}
 LOAD GAME
 <br>
-<button style="background-color: blue; color:white; border-radius: 50%; padding: 15px 16px">Slot A</button>
+
+
+{% if not slota%}
+<button style="background-color: pink; color:white; border-radius: 50%; padding: 15px 16px">Slot A - Etat : "Free" </button>
+
+{%endif %}
+
+{% if slota%}
+<button style="background-color: pink; color:white; border-radius: 50%; padding: 15px 16px">Slot A - Niveau : {{slotaNiveau}} / 10</button>
+
+{%endif %}
+
 <br>
-<button style="background-color: red; color:white; border-radius: 50%; padding: 15px 16px">Slot B</button>
+
+{% if not slotb%}
+<button style="background-color: red; color:white; border-radius: 50%; padding: 15px 16px">Slot B - Etat : "Free" </button>
+
+{%endif %}
+
+{% if slotb%}
+<button style="background-color: red; color:white; border-radius: 50%; padding: 15px 16px">Slot B - Niveau : {{slotbNiveau}} / 10</button>
+
+{%endif %}
+
 <br>
-<button style="background-color: green; color:white; border-radius: 50%; padding: 15px 16px">Slot C</button>
+
+{% if not slotc%}
+<button style="background-color: green; color:white; border-radius: 50%; padding: 15px 16px">Slot C - Etat : "Free" </button>
+
+{%endif %}
+
+{% if slotc%}
+<button style="background-color: green; color:white; border-radius: 50%; padding: 15px 16px">Slot C - Niveau : {{slotcNiveau}} / 10</button>
+
+{%endif %}
+
+<br>
+
+
+<button>
+    A - Save
+</button>
+
+<button>
+    B - Cancel
+</button>
 
 {% endblock %}
-
 

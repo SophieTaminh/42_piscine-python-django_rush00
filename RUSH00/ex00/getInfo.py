@@ -13,10 +13,13 @@ class moviemon:
     def __init__(self):
         "Ok on a initialise la classe moviemon"
     
-    def load(self, nomSlot, score):
-        nomfichier = "slot" + nomSlot + "_" + score + ".mmg"
+    def load(self, fileName):
+        nomdossiersauvegarde = "saved_game/"
+        nomfichier = fileName
+        nomSauvegarde = nomdossiersauvegarde + nomfichier
         self = pickle.load(open(nomfichier, 'rb'))
         return self
+
     
     def get_random_movie(self, moviemonListAvecDetailClean):
         randomNumber = random.randint(0, len(moviemonListAvecDetailClean) - 1)
@@ -64,13 +67,14 @@ class moviemon:
                 return moviemonDetail
         return ""
 
-    def save(self, nomSlot, score):
+    def save(self, fileName):
         nomdossiersauvegarde = "saved_game/"
         if not os.path.exists(nomdossiersauvegarde):
             os.makedirs(nomdossiersauvegarde)
-        nomfichier = "slot" + nomSlot + "_" + score + ".mmg"
-        os.system("touch " + nomdossiersauvegarde + nomfichier)
-        pickle.dump(self, open(nomfichier, 'wb'))
+        nomfichier = fileName
+        nomSauvegarde = nomdossiersauvegarde + nomfichier
+        os.system("touch " + nomSauvegarde)
+        pickle.dump(self, open(nomSauvegarde, 'wb'))
         return self
 
     def saveTMP(self):
