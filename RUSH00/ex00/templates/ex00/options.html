@@ -11,18 +11,16 @@ Options
 
 
 {% block content %}
-{% verbatim myblock %}
-Les options du jeu.
-
+Les options du jeu:
 <div>
-    <button type="button"><a href="/ex00/options/save_game">A - Save</a></button>
-    <button type="button"><a href="/ex00/">B - Quit</a></button>
-    <button type="button"><a href="/ex00/worldmap">start - cancel</a></button>
+A - Save<br>
+B - Quit<br>
+start - cancel<br><br>
+    <a href="/worldmap" title="Back to World Map">Start</a>
+    <a href="/" title="Quit">B</a>
+    <a href="/options/save_game" title="Save">A</a>
 </div>
 
-
-
-{% endverbatim myblock %}
 {% endblock %}
 
 

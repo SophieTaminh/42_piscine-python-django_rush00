@@ -30,19 +30,19 @@ def worldmap(request):
 	if (move=='left'):
 		if position['x'] > 0:
 			position['x'] = position['x'] - 1
-		return(redirect("/ex00/worldmap"))
+		return(redirect("/worldmap"))
 	if (move=='right'):
 		if position['x'] < width - 1:
 			position['x'] = position['x'] + 1
-		return(redirect("/ex00/worldmap"))
+		return(redirect("/worldmap"))
 	if (move=='up'):
 		if position['y'] > 0:
 			position['y'] = position['y'] - 1
-		return(redirect("/ex00/worldmap"))
+		return(redirect("/worldmap"))
 	if (move=='down'):
 		if position['y'] < height - 1:
 			position['y'] = position['y'] + 1
-		return(redirect("/ex00/worldmap"))
+		return(redirect("/worldmap"))
 	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position) })
 
 def battle(request, id):

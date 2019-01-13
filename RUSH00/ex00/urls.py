@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.accueil, name='accueil'),
+    path(r'^$', views.accueil, name='accueil'),
     path('worldmap', views.worldmap, name='worldmap'),
     path('battle/<slug:id>', views.battle, name='battle'),
     path('moviedex', views.moviedex, name='moviedex'),
