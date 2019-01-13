@@ -16,16 +16,21 @@ Moviemon - World Map
         <div id="ecran">
             <div>A - if Moviemon Battle</div>
             <div>B - (rien)</div>
-            <div class="explain">
+            <div id="grid">
             {% for x in grid %}
                 {% for y in x %}
                 <span class="square">{{y}}</span> 
                 {% endfor %}  
                 <br>
             {% endfor %}
-            Avant d’afficher, le fichier contenant infos 
-            partie en cours doit être réinitialisé avec params
-            des Settings et les Moviemons doivent être requêtés à nouveau.
+			<div id="info">
+				<div id="numballs">You have 3 movieballs</div>
+			  {% if found == 1 %}
+				<div id="message">You got a movieball!</div>
+			  {% else %}
+				<div id="message">You found a Moviemon! Press A to try to catch it!</div>
+			  {% endif %}
+				numViews: {{numViews}}
             </div>  
         </div>
         <div id="controles">

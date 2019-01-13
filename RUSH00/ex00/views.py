@@ -5,6 +5,9 @@ from . import getInfo
 # Create your views here.
 
 def accueil(request):
+	settings = getInfo.moviemon()
+	settings.load_default_settings()
+	settings.saveTMP()
 	return render(request, "ex00/accueil.html")
 
 def make_grid(width, height, position):
@@ -19,31 +22,45 @@ def make_grid(width, height, position):
         grid.append(new)
     return grid
 
+def displayObject(o):
+	#print(str(o.__class__) + ": " + str(o.__dict__))
+	print(o.position)
+
 def worldmap(request):
 	print("hey new game?")
 	move = request.GET.get('move', '')
 	settings = getInfo.moviemon()
-	settings.load_default_settings()
+	settings = settings.dump()
+	print("settings.position")
+	print(settings.position)
+	displayObject(settings)
 	width = settings.grid_size['width']
 	height = settings.grid_size['height']
 	position = settings.position
 	if (move=='left'):
 		if position['x'] > 0:
-			position['x'] = position['x'] - 1
+			settings.position['x'] = position['x'] - 1
+			settings.saveTMP()
 		return(redirect("/worldmap"))
 	if (move=='right'):
 		if position['x'] < width - 1:
-			position['x'] = position['x'] + 1
+			settings.position['x'] = position['x'] + 1
+			settings.saveTMP()
 		return(redirect("/worldmap"))
 	if (move=='up'):
 		if position['y'] > 0:
-			position['y'] = position['y'] - 1
+			settings.position['y'] = position['y'] - 1
+			settings.saveTMP()
 		return(redirect("/worldmap"))
 	if (move=='down'):
 		if position['y'] < height - 1:
-			position['y'] = position['y'] + 1
+			settings.position['y'] = position['y'] + 1
+			settings.saveTMP()
 		return(redirect("/worldmap"))
-	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position) })
+	from random import randint
+	print(randint(0, 1))
+	settings.saveTMP()
+	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position), 'found': 0 })
 
 def battle(request, id):
 	print("battle!", id)
