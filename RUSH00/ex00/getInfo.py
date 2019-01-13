@@ -49,9 +49,9 @@ class moviemon:
     def get_strength(self):
         return len(self.moviedex)
     
-    def get_movie(self, moviemonName):
+    def get_movie(self, moviemonId):
         for moviemon in self.moviemonListAvecDetail:
-            if (moviemon['title'] == moviemonName):
+            if (moviemon['title'] == moviemonId):
                 moviemonDetail = {
                     'nom' : moviemon['title'],
                     'poster' : moviemon['poster'],
@@ -65,18 +65,25 @@ class moviemon:
         return ""
 
     def save(self, nomSlot, score):
+        nomdossiersauvegarde = "saved_game/"
+        if not os.path.exists(nomdossiersauvegarde):
+            os.makedirs(nomdossiersauvegarde)
         nomfichier = "slot" + nomSlot + "_" + score + ".mmg"
-        os.system("touch " + nomfichier)
+        os.system("touch " + nomdossiersauvegarde + nomfichier)
         pickle.dump(self, open(nomfichier, 'wb'))
         return self
 
     def saveTMP(self):
-        pickle.dump(self, open("mypicklefile.txt", 'wb'))
+        nomdossiersauvegarde = "saved_game/"
+        if not os.path.exists(nomdossiersauvegarde):
+            os.makedirs(nomdossiersauvegarde)
+        pickle.dump(self, open(nomdossiersauvegarde + "mypicklefile.txt", 'wb'))
         return self
 
     def dump(self):
-        pickle.dump(self, open('mypicklefile.txt', 'rb'))     
-        return self
+        nomdossiersauvegarde = "saved_game/"
+        moviemongame = pickle.load(open(nomdossiersauvegarde + 'mypicklefile.txt', 'rb'))
+        return moviemongame
     
 
 # if __name__ == '__main__':
