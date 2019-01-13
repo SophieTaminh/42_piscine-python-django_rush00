@@ -9,18 +9,25 @@ Moviedex
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'ex01/style2.css' %}" /> -->
 {% endblock %}
 
-
 {% block content %}
-
-Liste des Moviemons capturés. Il doit être possible de sélectionner un film pour accéder aux détails de celui-ci.
-
+<div id="console">
+    <div id="ecran">
+	  <div id="moviedex_item">
+		<div class="name">Moviedex</div>
+		<div>
+A : Lien vers la page Detail du Moviemon sélectionne<br>
+SELECT : Lien vers la page Worldmap
+       </div>
+<div>
 {% for moviemon in moviedex%}
-<br>
-<img src={{moviemon.poster}} alt="moviemon" height="250" width="250">
-<br>
+<img class="moviedex_item" src={{moviemon.poster}} alt="moviemon">
 {% endfor %}
-<button><a href="/worldmap" title="Wordlmap">Select</a></button>
-<button><a href="/moviedex/0" title="MovieDetail">A</a></button>
+</div>
+      </div>
+    </div>
+    {% include "ex00/controles.html" %}
+</div>
+
 {% endblock %}
 
 

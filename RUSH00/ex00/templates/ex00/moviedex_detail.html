@@ -9,14 +9,13 @@ Detail
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'ex01/style2.css' %}" /> -->
 {% endblock %}
 
-
 {% block content %}
-
-Moviedex details
+<div id="console">
+    <div id="ecran">
+	  <div id="moviedex_item_detail">
+		<div class="name">{{moviemonDetail.nom}}</div>
 <br>
-{{moviemonDetail.nom}}
-<br>
-<img src={{moviemonDetail.poster}} alt="moviemon" height="500" width="500">
+<img class="moviedex_item_detail" src={{moviemonDetail.poster}} alt="moviemon">
 <br>
 Réalisateur : {{moviemonDetail.realisateur}}
 <br>
@@ -27,7 +26,11 @@ Rating : {{moviemonDetail.rating}}
 Synopsis : {{moviemonDetail.synopsis}}
 <br>
 Acteurs : {{moviemonDetail.acteurs}}
-<br>
+      </div>
+    </div>
+    {% include "ex00/controles.html" %}
+</div>
+
 {% endblock %}
 
 

@@ -39,6 +39,51 @@ a {
 a:link {
     color:inherit;
 }
+#game_name {
+    font-size: 8vw;
+}
 #welcome_message {
-	padding-top: 20vw;
+	padding-top: 6vw;
+}
+
+#moviedex_item {
+	font-size: 1.5vw;
+}
+#moviedex_item .name {
+	font-size: 2vw;
+	padding: 2vw;
+}
+#moviedex_item div {
+	padding: 2vw;
+}
+#moviedex_item img {
+	height: 12vw;
+	width: 8vw;
+}
+
+#moviedex_item_detail {
+	font-size: 1.5vw;
+}
+#moviedex_item_detail .name {
+	font-size: 2vw;
+	padding-top: 2vw;
+}
+#moviedex_item_detail img {
+	height: 24vw;
+	width: 16vw;
+}
+
+#battle {
+	font-size: 1.5vw;
+}
+#battle .name {
+	font-size: 2vw;
+	padding: 1vw;
+}
+#battle div {
+	padding: 1vw;
+}
+#battle img {
+	height: 21vw;
+	width: 14vw;
 }

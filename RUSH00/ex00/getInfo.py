@@ -22,7 +22,11 @@ class moviemon:
 
     
     def get_random_movie(self, moviemonListAvecDetailClean):
-        randomNumber = random.randint(0, len(moviemonListAvecDetailClean) - 1)
+        print('HELLO', moviemonListAvecDetailClean)
+        if len(moviemonListAvecDetailClean) > 1:
+            randomNumber = random.randint(0, len(moviemonListAvecDetailClean) - 1)
+        else:
+            randomNumber = 0
         return moviemonListAvecDetailClean[randomNumber]
     
     def load_default_settings(self):
