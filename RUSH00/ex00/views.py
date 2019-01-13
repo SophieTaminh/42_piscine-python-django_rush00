@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import getInfo
 import os
+import random
 
 # Create your views here.
 
@@ -29,26 +30,26 @@ def displayObject(o):
 
 def do_move(settings, move):
     did_move = False
-    width = settings.grid_size[‘width’]
-    height = settings.grid_size[‘height’]
+    width = settings.grid_size['width']
+    height = settings.grid_size['height']
     position = settings.position
-    if (move==‘left’):
-        if position[‘x’] > 0:
-            settings.position[‘x’] = position[‘x’] - 1
+    if (move=='left'):
+        if position['x'] > 0:
+            settings.position['x'] = position['x'] - 1
             did_move = True
-        return(redirect(“/worldmap”))
-    if (move==‘right’):
-        if position[‘x’] < width - 1:
-            settings.position[‘x’] = position[‘x’] + 1
+        return(redirect('/worldmap'))
+    if (move=='right'):
+        if position['x'] < width - 1:
+            settings.position['x'] = position['x'] + 1
             did_move = True
-        return(redirect(“/worldmap”))
-    if (move==‘up’):
-        if position[‘y’] > 0:
-            settings.position[‘y’] = position[‘y’] - 1
+        return(redirect('/worldmap'))
+    if (move=='up'):
+        if position['y'] > 0:
+            settings.position['y'] = position['y'] - 1
             did_move = True
-    if (move==‘down’):
-        if position[‘y’] < height - 1:
-            settings.position[‘y’] = position[‘y’] + 1
+    if (move=='down'):
+        if position['y'] < height - 1:
+            settings.position['y'] = position['y'] + 1
             did_move = True
     return did_move
 
@@ -87,10 +88,31 @@ def worldmap(request):
 def battle(request, id):
 	print("battle!", id)
 	settings = getInfo.moviemon()
-	tmp = settings.dump()
-	print(tmp.position)
-
-	return render(request, "ex00/battle.html")
+	game = settings.dump()
+	game.nombreMovieballs
+	moviemonABattre = game.get_movie(id)
+	moviemonballTry = request.GET.get('movieball')
+	message = ""
+	if (moviemonballTry):
+		if (game.nombreMovieballs > 0):
+			game.nombreMovieballs = game.nombreMovieballs - 1
+			forceMonstre = float(moviemonABattre['rating']) * 10
+			forceJoueur = len(game.moviedex)
+			chance = 50 - int(forceMonstre) + forceJoueur * 5
+			randomNumber = random.randint(1, 100)
+			moviemonListAvecDetailClean = []
+			if (chance >= randomNumber):
+				game.moviedex.append(moviemonABattre)
+				for moviemon in game.moviemonListAvecDetail:
+					if (moviemon['title'] != moviemonABattre['nom']):
+						moviemonListAvecDetailClean.append(moviemon)
+				game.moviemonListAvecDetail = moviemonListAvecDetailClean
+				game.saveTMP()
+				return(redirect('/worldmap'))
+			game.saveTMP()
+		else :
+			message = "Tu n'as plus de movieballs"
+	return render(request, "ex00/battle.html", {"message" : message, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id})
 
 def moviedex(request):
 	return render(request, "ex00/moviedex.html")
