@@ -18,6 +18,10 @@ body {
     padding-bottom: 0vw;
     font-size: 3vw;
 }
+.start_select {
+	font-family: sans-serif;
+    font-size: 2vw;
+}
 .explain {
     font-size: 2vw;
 }

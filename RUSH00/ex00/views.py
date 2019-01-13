@@ -41,7 +41,8 @@ def worldmap(request):
 			position['y'] = position['y'] + 1
 	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position) })
 
-def battle(request):
+def battle(request, id):
+	print("battle!", id)
 	return render(request, "ex00/battle.html")
 
 def moviedex(request):
