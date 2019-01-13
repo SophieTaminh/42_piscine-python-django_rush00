@@ -11,27 +11,46 @@ Battle
 
 
 {% block content %}
-Essayez de capturer le Moviemon que vous avez débusqué !
-{% if message %}
-<br>
-<br>
-<div style="color : red">
-    {{ message}}
-</div>
-{% endif %}
-<br>
-Nom du moviemon : {{moviemonABattre.nom}}
-<br>
-Force du moviemon : {{moviemonABattre.rating}}
-<br>
-<img src={{moviemonABattre.poster}} alt="moviemon" height="500" width="500">
-<br>
-Nombre de movieBalls en stock : {{nombreMovieballs}}
-<br>
+    Essayez de capturer le Moviemon que vous avez débusqué !
+    <br>
+    <br>
+    <br>
+    Nom du moviemon : {{moviemonABattre.nom}}
+    <br>
+    Force du moviemon : {{moviemonABattre.rating}}
+    <br>
+    <br>
+    Force du joueur : {{forceJoueur}}
+    <br>
+    <img src={{moviemonABattre.poster}} alt="moviemon" height="500" width="500">
+    <br>
+    Nombre de movieBalls en stock : {{nombreMovieballs}}
+    <br>
 
-<button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button>
-<button><a href="/worldmap" title="Return">B</a></button>
-    
+    {% if message == "Tu as attrapé un moviemon !"%}
+        <div style="color : blue">
+            {{message}}
+        </div>
+        <button> <a title="TryCatch">A - Launch movieball </a></button>
+    {% endif %}
+    {% if message == "Retente ta chance !"%}
+        <div style="color : green">
+            {{message}}
+        </div>
+        <button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button>
+    {% endif %}
+    {% if message == "Tu n'as plus de movieballs"%}
+        <div style="color : red">
+            {{message}}
+        </div>
+        <button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button>
+    {% endif %}
+    {% if message == ""%}
+        <button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button>
+    {% endif %}
+
+    <button><a href="/worldmap" title="Return">B</a></button>
+        
 
 {% endblock %}
 

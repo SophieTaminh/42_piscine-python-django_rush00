@@ -87,11 +87,12 @@ def battle(request, id):
 	moviemonABattre = game.get_movie(id)
 	moviemonballTry = request.GET.get('movieball')
 	message = ""
+	forceJoueur = 0
 	if (moviemonballTry):
 		if (game.nombreMovieballs > 0):
 			game.nombreMovieballs = game.nombreMovieballs - 1
 			forceMonstre = float(moviemonABattre['rating']) * 10
-			forceJoueur = len(game.moviedex)
+			forceJoueur = game.get_strength()
 			chance = 50 - int(forceMonstre) + forceJoueur * 5
 			randomNumber = random.randint(1, 100)
 			moviemonListAvecDetailClean = []
@@ -102,11 +103,13 @@ def battle(request, id):
 						moviemonListAvecDetailClean.append(moviemon)
 				game.moviemonListAvecDetail = moviemonListAvecDetailClean
 				game.saveTMP()
-				return(redirect('/worldmap'))
+				message = "Tu as attrapé un moviemon !"
+			else :
+				message = "Retente ta chance !"
 			game.saveTMP()
 		else :
 			message = "Tu n'as plus de movieballs"
-	return render(request, "ex00/battle.html", {"message" : message, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id})
+	return render(request, "ex00/battle.html", {"message" : message, "forceJoueur" : forceJoueur, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id})
 
 def moviedex(request):
 	settings = getInfo.moviemon()
