@@ -128,7 +128,13 @@ def options_load_game(request):
 	for fichiers in listeFichiers:
 		if (fichiers != "mypicklefile.txt"):
 			listeGame.append(fichiers)
-	print(listeGame)
+	selectionne = request.GET.get('selectionne')
+	if (selectionne != None):
+		for fichier in listeGame:
+			if selectionne in fichier:
+				game = settings.load(fichier)
+				game.saveTMP()
+				return(redirect("/worldmap"))
 	slota = False
 	slotb = False
 	slotc = False
