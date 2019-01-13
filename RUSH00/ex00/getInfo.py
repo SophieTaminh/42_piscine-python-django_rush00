@@ -17,7 +17,7 @@ class moviemon:
         nomdossiersauvegarde = "saved_game/"
         nomfichier = fileName
         nomSauvegarde = nomdossiersauvegarde + nomfichier
-        self = pickle.load(open(nomfichier, 'rb'))
+        self = pickle.load(open(nomSauvegarde, 'rb'))
         return self
 
     
