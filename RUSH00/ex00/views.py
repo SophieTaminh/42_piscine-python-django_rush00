@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import getInfo
 import os
+import random
 
 # Create your views here.
 
@@ -81,10 +82,31 @@ def worldmap(request):
 def battle(request, id):
 	print("battle!", id)
 	settings = getInfo.moviemon()
-	tmp = settings.dump()
-	print(tmp.position)
-
-	return render(request, "ex00/battle.html")
+	game = settings.dump()
+	game.nombreMovieballs
+	moviemonABattre = game.get_movie(id)
+	moviemonballTry = request.GET.get('movieball')
+	message = ""
+	if (moviemonballTry):
+		if (game.nombreMovieballs > 0):
+			game.nombreMovieballs = game.nombreMovieballs - 1
+			forceMonstre = float(moviemonABattre['rating']) * 10
+			forceJoueur = len(game.moviedex)
+			chance = 50 - int(forceMonstre) + forceJoueur * 5
+			randomNumber = random.randint(1, 100)
+			moviemonListAvecDetailClean = []
+			if (chance >= randomNumber):
+				game.moviedex.append(moviemonABattre)
+				for moviemon in game.moviemonListAvecDetail:
+					if (moviemon['title'] != moviemonABattre['nom']):
+						moviemonListAvecDetailClean.append(moviemon)
+				game.moviemonListAvecDetail = moviemonListAvecDetailClean
+				game.saveTMP()
+				return(redirect('/worldmap'))
+			game.saveTMP()
+		else :
+			message = "Tu n'as plus de movieballs"
+	return render(request, "ex00/battle.html", {"message" : message, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id})
 
 def moviedex(request):
 	return render(request, "ex00/moviedex.html")

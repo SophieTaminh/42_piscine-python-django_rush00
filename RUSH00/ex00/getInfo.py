@@ -58,7 +58,7 @@ class moviemon:
     
     def get_movie(self, moviemonId):
         for moviemon in self.moviemonListAvecDetail:
-            if (moviemon['title'] == moviemonId):
+            if (moviemon['imdb_id'] == moviemonId):
                 moviemonDetail = {
                     'nom' : moviemon['title'],
                     'poster' : moviemon['poster'],

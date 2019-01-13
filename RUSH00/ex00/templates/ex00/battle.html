@@ -12,8 +12,12 @@ Battle
 
 {% block content %}
 Essayez de capturer le Moviemon que vous avez débusqué !
-{% if alerteNoob %}
-    HANNNNN UN NOOB
+{% if message %}
+<br>
+<br>
+<div style="color : red">
+    {{ message}}
+</div>
 {% endif %}
 <br>
 Nom du moviemon : {{moviemonABattre.nom}}
@@ -26,7 +30,7 @@ Nombre de movieBalls en stock : {{nombreMovieballs}}
 <br>
 
 <button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button>
-<button>B</button>
+<button><a href="/worldmap" title="Return">B</a></button>
     
 
 {% endblock %}
