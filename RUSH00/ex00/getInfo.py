@@ -37,11 +37,11 @@ class moviemon:
                 res = omdb.get(title=moviemonList[index])
                 if (res):
                     self.moviemonListAvecDetail.append(res)
-                    print(res)
             self.nombreMovieballs = 3
             self.found = 0
             self.found_moviemon = ''
             self.moviedex = []
+            
         except Exception as e:
             print(e)
         return self

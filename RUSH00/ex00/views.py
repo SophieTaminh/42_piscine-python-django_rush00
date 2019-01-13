@@ -10,7 +10,15 @@ def accueil(request):
 	settings = getInfo.moviemon()
 	settings.load_default_settings()
 	settings.saveTMP()
-	return render(request, "ex00/accueil.html")
+	controls_params = {
+		'left_href'  : '', 'up_href'  : '', 'down_href'  : '', 'right_href'  : '',
+		'left_title' : '', 'up_title' : '', 'down_title' : '', 'right_title' : '',
+		'select_href'   : '', 'start_href'  : '',
+		'select_title'  : '', 'start_title' : '',
+		'a_href'   : '/worldmap', 'b_href'  : '/options/load_game',
+		'a_title'  : 'New game', 'b_title' : 'Load existing game',
+		}
+	return render(request, "ex00/accueil.html", controls_params)
 
 def make_grid(width, height, position):
     grid = []
@@ -77,7 +85,21 @@ def worldmap(request):
 	width = settings.grid_size['width']
 	height = settings.grid_size['height']
 	position = settings.position
-	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position), 'found': settings.found, 'found_moviemon': settings.found_moviemon, 'numballs': settings.nombreMovieballs })
+	controls_params = {
+		'left_href' : '/worldmap?move=left', 'up_href' : '/worldmap?move=up', 'down_href' : '/worldmap?move=down', 'right_href'  : '/worldmap?move=right',
+		'left_title' : 'Move left', 'up_title' : 'Move up', 'down_title' : 'Move down', 'right_title' : 'Move right',
+		'select_href'   : '/moviedex', 'start_href'  : '/options',
+		'select_title'  : 'Moviedex', 'start_title' : 'Options',
+		'a_href'   : '', 'b_href'  : '/worldmap',
+		'a_title'  : '', 'b_title' : '',
+		}
+	if settings.found == 2:
+		controls_params['a_href'] = "/battle/" + settings.found_moviemon
+		print('FFFFOUND', controls_params['a_href'])
+		controls_params['a_title'] == "Battle!"
+	other_params = { 'grid':make_grid(width, height, position), 'found': settings.found, 'found_moviemon': settings.found_moviemon, 'numballs': settings.nombreMovieballs }
+	all_params = { **controls_params, **other_params }
+	return render(request, "ex00/worldmap.html", all_params)
 
 def battle(request, id):
 	settings = getInfo.moviemon()
