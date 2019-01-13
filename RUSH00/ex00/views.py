@@ -134,7 +134,10 @@ def battle(request, id):
 				game.saveTMP()
 				message = "Tu as attrapé un moviemon !"
 			else :
-				message = "Retente ta chance !"
+				if (game.nombreMovieballs > 0):
+					message = "Retente ta chance !"
+				else:
+					message = "Tu n'as plus de movieballs"
 			game.saveTMP()
 		else :
 			message = "Tu n'as plus de movieballs"
