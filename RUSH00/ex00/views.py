@@ -7,9 +7,9 @@ from . import getInfo
 def accueil(request):
 	return render(request, "ex00/accueil.html")
 
-def make_grid(width, position):
+def make_grid(width, height, position):
     grid = []
-    for y in range (0, width):
+    for y in range (0, height):
         new = []
         for x in range (0, width):
             if (x == position['x']) and (y == position['y']):
@@ -25,16 +25,21 @@ def worldmap(request):
 	settings = getInfo.moviemon()
 	settings.load_default_settings()
 	width = settings.grid_size['width']
+	height = settings.grid_size['height']
 	position = settings.position
-	if (move=='right'):
-		position['x'] = position['x'] + 1
 	if (move=='left'):
-		position['x'] = position['x'] - 1
+		if position['x'] > 0:
+			position['x'] = position['x'] - 1
+	if (move=='right'):
+		if position['x'] < width - 1:
+			position['x'] = position['x'] + 1
 	if (move=='up'):
-		position['y'] = position['y'] - 1
+		if position['y'] > 0:
+			position['y'] = position['y'] - 1
 	if (move=='down'):
-		position['y'] = position['y'] + 1
-	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width,position) })
+		if position['y'] < height - 1:
+			position['y'] = position['y'] + 1
+	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position) })
 
 def battle(request):
 	return render(request, "ex00/battle.html")
