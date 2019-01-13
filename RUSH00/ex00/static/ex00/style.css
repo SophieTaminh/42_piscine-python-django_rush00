@@ -4,16 +4,18 @@ body {
 }
 #console {
     width: 50vw;
-    height: 60vw;
-    border: 1px solid lightgray;
+    border: 5px solid lightgray;
+    padding: 3vw;
+	background-color: lightgray;
 }
 #ecran {
     height: 45vw;
-    border: 1px solid green;
     font-size: 3vw;
+	background-color: white;
 }
 #controles {
-    border: 1px solid red;
+    padding-top: 3vw;
+    padding-bottom: 0vw;
     font-size: 3vw;
 }
 .explain {
@@ -21,4 +23,7 @@ body {
 }
 .square {
     font-size: 2.5vw;
+}
+a {
+    text-decoration: none;
 }

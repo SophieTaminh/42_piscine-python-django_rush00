@@ -1,7 +1,7 @@
 {% extends "ex00/base.html" %}
 
 {% block title %}
-Worldmap
+Moviemon - World Map
 {% endblock %}
 
 {% block style %}
@@ -13,7 +13,6 @@ Worldmap
 {% block content %}
 
 <div id="console">
-        Ecran:
         <div id="ecran">
             <div>A - if Moviemon Battle</div>
             <div>B - (rien)</div>
@@ -30,12 +29,14 @@ Worldmap
             des Settings et les Moviemons doivent être requêtés à nouveau.
             </div>  
         </div>
-        Controles:
         <div id="controles">
-                ◄ ▲ ▼ ►
+		  <a href="/ex00/worldmap?move=left">◄</a>
+		  <a href="/ex00/worldmap?move=up">▲</a>
+		  <a href="/ex00/worldmap?move=down">▼</a>
+		  <a href="/ex00/worldmap?move=right">►</a>
                 SELECT START
-            <a href="/ex00/option/load">B</a>
-            <a href="/ex00/worldmap">A</a>
+          <a href="/ex00/option/load">B</a>
+          <a href="/ex00/worldmap">A</a>
         </div>
     </div>
 
