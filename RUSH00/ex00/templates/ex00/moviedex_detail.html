@@ -11,9 +11,23 @@ Detail
 
 
 {% block content %}
-{% verbatim myblock %}
+
 Moviedex details
-{% endverbatim myblock %}
+<br>
+{{moviemonDetail.nom}}
+<br>
+<img src={{moviemonDetail.poster}} alt="moviemon" height="500" width="500">
+<br>
+Réalisateur : {{moviemonDetail.realisateur}}
+<br>
+Année : {{moviemonDetail.annee}}
+<br>
+Rating : {{moviemonDetail.rating}}
+<br>
+Synopsis : {{moviemonDetail.synopsis}}
+<br>
+Acteurs : {{moviemonDetail.acteurs}}
+<br>
 {% endblock %}
 
 

@@ -117,6 +117,14 @@ def moviedex(request):
 	moviedex = game.moviedex
 	return render(request, "ex00/moviedex.html", {"moviedex" : moviedex})
 
+def moviedexDetail(request, id):
+	settings = getInfo.moviemon()
+	game = settings.dump()
+	moviedex = game.moviedex
+	print(moviedex[int(id)])
+	# moviemonSelectionne
+	return render(request, "ex00/moviedex_detail.html", {"moviemonDetail" : moviedex[int(id)]})
+
 def options(request):
 	return render(request, "ex00/options.html")
 
@@ -134,7 +142,7 @@ def options_load_game(request):
 			if selectionne in fichier:
 				game = settings.load(fichier)
 				game.saveTMP()
-				return(redirect("/worldmap"))
+				# return(redirect("/worldmap"))
 	slota = False
 	slotb = False
 	slotc = False
