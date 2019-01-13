@@ -121,8 +121,6 @@ def moviedexDetail(request, id):
 	settings = getInfo.moviemon()
 	game = settings.dump()
 	moviedex = game.moviedex
-	print(moviedex[int(id)])
-	# moviemonSelectionne
 	return render(request, "ex00/moviedex_detail.html", {"moviemonDetail" : moviedex[int(id)]})
 
 def options(request):
