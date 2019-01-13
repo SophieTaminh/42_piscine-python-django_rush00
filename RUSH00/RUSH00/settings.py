@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'xvn+wjz9_tuk$gs$!#*q508+v1bls1rbu@k#8(-!g#z_h6^m8_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -128,19 +128,19 @@ MOVIEMON_SETTINGS = [
         },
         'position_start' : {
             'x' : 0,
-            'y' : 3
+            'y' : 0
         },
         'IMDB_title' : {
             0 : "True Grit",
             1 : "Sinbad: The Fifth Voyage",
             2 : "Jaguar: Part 2",
             3 : "Breathe Deeply",
-            4 : "Marlene Dietrich",
-            5 : "Jeanette MacDonald",
-            6 : "Joan Crawford",
+            4 : "Justice League",
+            5 : "Epic Movie",
+            6 : "Glitter",
             7 : "Alfred the Great",
-            8 : "Aamiainen motellissa",
-            9 : "Miksi Mikkosista tuli mielipidevaikuttajia?",
+            8 : "Back to school",
+            9 : "Disaster Movie",
         }
     }
 ]
