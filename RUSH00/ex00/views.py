@@ -80,7 +80,6 @@ def worldmap(request):
 	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position), 'found': settings.found, 'found_moviemon': settings.found_moviemon, 'numballs': settings.nombreMovieballs })
 
 def battle(request, id):
-	print("battle!", id)
 	settings = getInfo.moviemon()
 	game = settings.dump()
 	game.nombreMovieballs
@@ -127,7 +126,6 @@ def options(request):
 	return render(request, "ex00/options.html")
 
 def options_load_game(request):
-	print("load_game")
 	settings = getInfo.moviemon()
 	listeFichiers = os.listdir("saved_game/")
 	listeGame = []
@@ -163,7 +161,6 @@ def options_load_game(request):
 	return render(request, "ex00/options_load_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC})
 
 def options_save_game(request):
-	print("save_game")
 	settings = getInfo.moviemon()
 	tmp = settings.dump()
 	listeFichiers = os.listdir("saved_game/")
@@ -171,7 +168,6 @@ def options_save_game(request):
 	for fichiers in listeFichiers:
 		if (fichiers != "mypicklefile.txt"):
 			listeGame.append(fichiers)
-	print(listeGame)
 	slota = False
 	slotb = False
 	slotc = False
@@ -205,6 +201,7 @@ def options_save_game(request):
 		if ("slotc" in saveName):
 			commandeEffacer = os.system("rm -f saved_game/slotc*")
 			tmp.save(fileName = saveName)
+	tmp.dump()
 	return render(request, "ex00/options_save_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC})
 
 def handler404(request):
