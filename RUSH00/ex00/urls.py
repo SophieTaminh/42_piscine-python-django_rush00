@@ -1,9 +1,9 @@
-from django.urls import path, include
+from django.urls import path, re_path, include
 from . import views
 
 urlpatterns = [
     path('', views.accueil, name='accueil'),
-    path(r'^$', views.accueil, name='accueil'),
+    re_path(r'^$', views.accueil, name='accueil'),
     path('worldmap', views.worldmap, name='worldmap'),
     path('battle/<slug:id>', views.battle, name='battle'),
     path('moviedex', views.moviedex, name='moviedex'),

@@ -28,47 +28,40 @@ def displayObject(o):
 	print(o.position)
 
 def do_move(settings, move):
-    did_move = False
-    width = settings.grid_size[‘width’]
-    height = settings.grid_size[‘height’]
-    position = settings.position
-    if (move==‘left’):
-        if position[‘x’] > 0:
-            settings.position[‘x’] = position[‘x’] - 1
-            did_move = True
-        return(redirect(“/worldmap”))
-    if (move==‘right’):
-        if position[‘x’] < width - 1:
-            settings.position[‘x’] = position[‘x’] + 1
-            did_move = True
-        return(redirect(“/worldmap”))
-    if (move==‘up’):
-        if position[‘y’] > 0:
-            settings.position[‘y’] = position[‘y’] - 1
-            did_move = True
-    if (move==‘down’):
-        if position[‘y’] < height - 1:
-            settings.position[‘y’] = position[‘y’] + 1
-            did_move = True
-    return did_move
-
-def random_move_event(settings):
-    from random import randint
-    rand = randint(0, 2)
-    if rand == 1:
-        settings.nombreMovieballs += 1
-    elif rand == 2:
-        junk = 0 # TODO: found a Moviemon
-    return rand
+	did_move = False
+	width = settings.grid_size['width']
+	height = settings.grid_size['height']
+	position = settings.position
+	if (move=='left'):
+		if position['x'] > 0:
+			settings.position['x'] = position['x'] - 1
+			did_move = True
+		return(redirect("/worldmap"))
+	if (move=='right'):
+		if position['x'] < width - 1:
+			settings.position['x'] = position['x'] + 1
+			did_move = True
+		return(redirect("/worldmap"))
+	if (move=='up'):
+		if position['y'] > 0:
+			settings.position['y'] = position['y'] - 1
+			did_move = True
+	if (move=='down'):
+		if position['y'] < height - 1:
+			settings.position['y'] = position['y'] + 1
+			did_move = True
+	return did_move
 
 def random_move_event(settings):
 	from random import randint
 	rand = randint(0, 2)
+	found_moviemon = ''
 	if rand == 1:
 		settings.nombreMovieballs += 1
 	elif rand == 2:
-		junk = 0 # TODO: found a Moviemon
-	return rand
+		m = settings.get_random_movie(settings.moviemonListAvecDetail)
+		found_moviemon = m['imdb_id']
+	return rand, found_moviemon
 
 def worldmap(request):
 	move = request.GET.get('move', '')
@@ -76,13 +69,14 @@ def worldmap(request):
 	settings = settings.dump()
 	if do_move(settings, move):
 		from random import randint
-		settings.found = random_move_event(settings)
+		settings.found, settings.found_moviemon = random_move_event(settings)
+		print("found2!", settings.found_moviemon)
 		settings.saveTMP()
 		return(redirect("/worldmap"))
 	width = settings.grid_size['width']
 	height = settings.grid_size['height']
 	position = settings.position
-	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position), 'found': settings.found, 'numballs': settings.nombreMovieballs })
+	return render(request, "ex00/worldmap.html", { 'grid':make_grid(width, height, position), 'found': settings.found, 'found_moviemon': settings.found_moviemon, 'numballs': settings.nombreMovieballs })
 
 def battle(request, id):
 	print("battle!", id)

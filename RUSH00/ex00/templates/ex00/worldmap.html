@@ -27,10 +27,9 @@ Moviemon - World Map
 				<div id="numballs">You have {{numballs}}  movieballs</div>
 			  {% if found == 1 %}
 				<div id="message">You got a movieball!</div>
-			  {% else %}
-				<div id="message">You found a Moviemon! Press A to try to catch it!</div>
+			  {% elif found == 2 %}
+				<div id="message">You found Moviemon {{found_moviemon}}! Press A to try to catch it!</div>
 			  {% endif %}
-				numViews: {{numViews}}
             </div>  
         </div>
         <div id="controles">
@@ -41,7 +40,11 @@ Moviemon - World Map
           <a href="/moviedex" title="Moviedex"><span class="start_select">SELECT</span></a>
           <a href="/options" title="Options"><span class="start_select">START</span></a>
           <a href="/worldmap" title="">B</a>
-          <a href="/battle/tt1403865" title="Battle! (if found Moviemon)">A</a>
+          {% if found == 2 %}
+          <a href="/battle/{{found_moviemon}}" title="Battle!">A</a>
+          {% else %}
+          <a href="" title="">A</a>
+          {% endif %}
         </div>
     </div>
 
