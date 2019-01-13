@@ -207,3 +207,5 @@ def options_save_game(request):
 			tmp.save(fileName = saveName)
 	return render(request, "ex00/options_save_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC})
 
+def handler404(request):
+    return render(request, '404.html', status=404)
