@@ -12,46 +12,35 @@ Battle
 {% block content %}
 <div id="console">
     <div id="ecran">
-      <div id="battle">
-		<div class="name">Battle</div>
-		<div>
-    Essayez de capturer le Moviemon que vous avez débusqué !
-    <br>
-    Moviemon : {{moviemonABattre.nom}}, 
-    force : {{moviemonABattre.rating}}
-    <br>
-    <br>
-    <img src={{moviemonABattre.poster}} alt="moviemon">
-    <br>
-    Joueur : force {{forceJoueur}}, nombre de movieBalls en stock : {{nombreMovieballs}}
-    <br>
+		<div >Battle</div>
+        <div class="info_battle">
+            <div>Essayez de capturer le Moviemon que vous avez débusqué !</div>
+            <div>Moviemon : {{moviemonABattre.nom}}, force : {{moviemonABattre.rating}}</div>
+        </div> <!-- info-->
 
-    {% if message == "Tu as attrapé un moviemon !"%}
-        <div style="color : blue">
-            {{message}}
-        </div>
-        <button> <a title="TryCatch">A - Launch movieball </a></button>
-    {% endif %}
-    {% if message == "Retente ta chance !"%}
-        <div style="color : green">
-            {{message}}
-        </div>
-        <button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button><br>
-    {% endif %}
-    {% if message == "Tu n'as plus de movieballs"%}
-        <div style="color : red">
-            {{message}}
-        </div>
-    {% endif %}
-    {% if message == ""%}
-        <button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button><br>
-    {% endif %}
-		B: Retour au World Map
+         <div ><img id="affiche" src={{moviemonABattre.poster}} alt="moviemon" ></div>
+        <div class="info_battle">
+            <div>Joueur : force {{forceJoueur}}, nombre de movieBalls en stock : {{nombreMovieballs}}</div>
+            {% if message == "Tu as attrapé un moviemon !"%}
+                <div style="color : blue">{{message}}</div>
+                <div> <a title="TryCatch">A - Launch movieball </a></div>
+            {% endif %}
+            {% if message == "Retente ta chance !"%}
+                <div style="color : green">{{message}}</div>
+                <button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button> 
+            {% endif %}
+            {% if message == "Tu n'as plus de movieballs"%}
+            <div style="color : red">{{message}}</div>
+            {% endif %}
+            {% if message == ""%}
+            <button> <a href="/battle/{{id}}?movieball=true" title="TryCatch">A - Launch movieball </a></button> 
+            {% endif %}
+            <div>B: Retour au World Map </div>
 
-      </div>
-    </div>
+        </div>
+    </div> <!-- ecran -->
     {% include "ex00/controles.html" %}
-</div>
+</div> <!-- console-->
         
 
 {% endblock %}

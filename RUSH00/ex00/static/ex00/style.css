@@ -2,6 +2,10 @@ body {
     text-align: center;
     font-size: 4vw;
 }
+div{
+ padding :0.5vw;
+}
+
 #console {
     width: 50vw;
     height: 55vw;
@@ -14,6 +18,10 @@ body {
     font-size: 3vw;
 	background-color: white;
 }
+#info {
+	 font-size: 2vw;
+}
+
 #controles {
     position: absolute;
 	top: 50vw;
@@ -75,6 +83,12 @@ a:link {
 
 #battle {
 	font-size: 1.5vw;
+}
+.info_battle {
+	 font-size: 1.5vw;
+}
+#affiche{
+	height: 20vw;
 }
 #battle .name {
 	font-size: 2vw;
