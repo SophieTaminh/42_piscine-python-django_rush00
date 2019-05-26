@@ -14,10 +14,10 @@ Battle
     <div id="ecran">
 
 		<div >Battle</div>
-
+        {% if moviemonABattre.nom %}
         <div class="info_battle">
             <div>Essayez de capturer le Moviemon que vous avez débusqué !</div>
-            <div>Moviemon : {{moviemonABattre.nom}}, force : {{moviemonABattre.rating}}</div>
+            <div>Moviemon : {{moviemonABattre.nom}} -- Force : {{moviemonABattre.rating}} -- Taux reussite : {{chance}}%</div>
         </div> <!-- info battle-->
 
         <div ><img id="affiche" src={{moviemonABattre.poster}} alt="moviemon" ></div>
@@ -38,6 +38,7 @@ Battle
             {% if message == ""%}
             <div> A - Launch movieball </a></div>
             {% endif %}
+        {% endif %}
             <div>B: Retour au World Map </div>
         </div> <!-- info battle-->
 

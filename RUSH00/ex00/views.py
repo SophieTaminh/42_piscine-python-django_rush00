@@ -119,7 +119,17 @@ def battle(request, id):
 	moviemonABattre = game.get_movie(id)
 	moviemonballTry = request.GET.get('movieball')
 	message = ""
-	forceJoueur = game.get_strength()
+	chance = 0
+	try:
+		forceJoueur = game.get_strength()
+		forceMonstre = float(moviemonABattre['rating']) * 10
+		chance = 50 - int(forceMonstre) + forceJoueur * 5
+		if chance < 1:
+			chance = 1
+		if chance > 90:
+			chance = 90
+	except Exception as e:
+		print(e)
 	if (moviemonballTry):
 		if (game.nombreMovieballs > 0 and moviemonABattre):
 			game.nombreMovieballs = game.nombreMovieballs - 1
@@ -152,10 +162,8 @@ def battle(request, id):
 		'select_title'  : '', 'start_title' : '',
 		'a_href'   : '/battle/'+id+'?movieball=true', 'b_href'  : '/worldmap?id='+id,
 		'a_title'  : '', 'b_title' : 'Retour au World Map',
-		"message" : message, "forceJoueur" : forceJoueur, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id
+		"message" : message, "forceJoueur" : forceJoueur, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id, "chance" : chance
 		}
-	if not moviemonABattre:
-		params['a_href'] = ''
 	return render(request, "ex00/battle.html", params)
 
 def do_move_moviedex(settings, move, selected):
