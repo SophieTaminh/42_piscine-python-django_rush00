@@ -204,7 +204,18 @@ def moviedexDetail(request, id):
 	return render(request, "ex00/moviedex_detail.html", controls_params)
 
 def options(request):
-	return render(request, "ex00/options.html")
+	settings = getInfo.moviemon()
+	settings.load_default_settings()
+	settings.saveTMP()
+	controls_params = {
+		'left_href'  : '', 'up_href'  : '', 'down_href'  : '', 'right_href'  : '',
+		'left_title' : '', 'up_title' : '', 'down_title' : '', 'right_title' : '',
+		'select_href'   : '', 'start_href'  : '/worldmap',
+		'select_title'  : '', 'start_title' : 'Back to World Map',
+		'a_href'   : '/options/save_game', 'b_href'  : '/',
+		'a_title'  : 'Save', 'b_title' : 'Quit',
+		}
+	return render(request, "ex00/options.html",controls_params)
 
 def options_load_game(request):
 	settings = getInfo.moviemon()
