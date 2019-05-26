@@ -133,8 +133,6 @@ def battle(request, id):
 				game.moviemonListAvecDetail = moviemonListAvecDetailClean
 				game.saveTMP()
 				message = "Tu as attrapé un moviemon !"
-				params['a_href'] = ''
-				return render(request, "ex00/battle.html", params)
 			else :
 				if (game.nombreMovieballs > 0):
 					message = "Retente ta chance !"
@@ -153,6 +151,8 @@ def battle(request, id):
 		'a_title'  : '', 'b_title' : 'Retour au World Map',
 		"message" : message, "forceJoueur" : forceJoueur, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id
 		}
+	if (message == "Tu as attrapé un moviemon !"):
+		params['a_href'] = ''
 	return render(request, "ex00/battle.html", params)
 
 def do_move_moviedex(settings, move):
