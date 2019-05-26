@@ -133,6 +133,8 @@ def battle(request, id):
 				game.moviemonListAvecDetail = moviemonListAvecDetailClean
 				game.saveTMP()
 				message = "Tu as attrapé un moviemon !"
+				params['a_href'] = ''
+				return render(request, "ex00/battle.html", params)
 			else :
 				if (game.nombreMovieballs > 0):
 					message = "Retente ta chance !"
@@ -141,12 +143,13 @@ def battle(request, id):
 			game.saveTMP()
 		else :
 			message = "Tu n'as plus de movieballs"
+
 	params = {
 		'left_href'  : '', 'up_href'  : '', 'down_href'  : '', 'right_href'  : '',
 		'left_title' : '', 'up_title' : '', 'down_title' : '', 'right_title' : '',
 		'select_href'   : '', 'start_href'  : '',
 		'select_title'  : '', 'start_title' : '',
-		'a_href'   : '', 'b_href'  : '/worldmap',
+		'a_href'   : '/battle/'+id+'?movieball=true', 'b_href'  : '/worldmap',
 		'a_title'  : '', 'b_title' : 'Retour au World Map',
 		"message" : message, "forceJoueur" : forceJoueur, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id
 		}
