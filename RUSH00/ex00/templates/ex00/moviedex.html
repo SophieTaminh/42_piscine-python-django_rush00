@@ -16,7 +16,11 @@ Moviedex
 		<div class="name">Moviedex</div>
 			<div>
 				{% for moviemon in moviedex%}
-					<img class="moviedex_item" src={{moviemon.poster}} alt="moviemon">
+                    {% if moviemon.id == selected %}
+                    <img class="moviedex_item" src={{moviemon.poster}} alt="moviemon" style="border: solid; border-color: blue; border-radius: 8%; padding: 3px;">
+                    {% else %}
+                    <img class="moviedex_item" src={{moviemon.poster}} alt="moviemon" style="padding: 3px;">
+                    {% endif %}
 				{% endfor %}
 			</div>
 		</div> <!--moviedex_item-->
@@ -29,5 +33,3 @@ Moviedex
 </div> <!-- console-->
 
 {% endblock %}
-
-

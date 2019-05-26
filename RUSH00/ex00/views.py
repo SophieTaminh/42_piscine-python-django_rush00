@@ -84,6 +84,7 @@ def random_move_event(settings):
 
 def worldmap(request):
 	move = request.GET.get('move', '')
+	old_id = request.GET.get('id', '')
 	settings = getInfo.moviemon()
 	settings = settings.dump()
 	if do_move(settings, move):
@@ -104,8 +105,9 @@ def worldmap(request):
 		'a_title'  : '', 'b_title' : '',
 		}
 	if settings.found == 2:
-		controls_params['a_href'] = "/battle/" + settings.found_moviemon
-		controls_params['a_title'] == "Battle!"
+		if not old_id:
+			controls_params['a_href'] = "/battle/" + settings.found_moviemon
+			controls_params['a_title'] == "Battle!"
 	other_params = { 'grid':make_grid(width, height, position), 'found': settings.found, 'found_moviemon': settings.found_moviemon, 'numballs': settings.nombreMovieballs }
 	all_params = { **controls_params, **other_params }
 	return render(request, "ex00/worldmap.html", all_params)
@@ -119,7 +121,7 @@ def battle(request, id):
 	message = ""
 	forceJoueur = game.get_strength()
 	if (moviemonballTry):
-		if (game.nombreMovieballs > 0):
+		if (game.nombreMovieballs > 0 and moviemonABattre):
 			game.nombreMovieballs = game.nombreMovieballs - 1
 			forceMonstre = float(moviemonABattre['rating']) * 10
 			chance = 50 - int(forceMonstre) + forceJoueur * 5
@@ -148,7 +150,7 @@ def battle(request, id):
 		'left_title' : '', 'up_title' : '', 'down_title' : '', 'right_title' : '',
 		'select_href'   : '', 'start_href'  : '',
 		'select_title'  : '', 'start_title' : '',
-		'a_href'   : '/battle/'+id+'?movieball=true', 'b_href'  : '/worldmap',
+		'a_href'   : '/battle/'+id+'?movieball=true', 'b_href'  : '/worldmap?id='+id,
 		'a_title'  : '', 'b_title' : 'Retour au World Map',
 		"message" : message, "forceJoueur" : forceJoueur, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id
 		}
@@ -156,8 +158,10 @@ def battle(request, id):
 		params['a_href'] = ''
 	return render(request, "ex00/battle.html", params)
 
-def do_move_moviedex(settings, move):
+def do_move_moviedex(settings, move, selected):
 	did_move = False
+	count = 0
+	dict_selected = {'selected' : '', 'left' : '', 'right' : '', 'up' : '', 'down' : ''}
 	if (move=='left'):
 		did_move = True
 	if (move=='right'):
@@ -166,7 +170,34 @@ def do_move_moviedex(settings, move):
 		did_move = True
 	if (move=='down'):
 		did_move = True
-	return did_move
+	if did_move:
+		for movie in settings.moviedex:
+			count += 1
+		if count >= 0:
+			if selected in ['0','1','2','3','4','5','6','7','8','9']:
+				dict_selected['selected'] = selected
+		if dict_selected['selected'] in ['0','1','2','3','4','5','6','7','8','9']:
+			if selected in ['5','6','7','8','9'] and move == 'up':
+				if count > (int(selected) - 5):
+					dict_selected['up'] = str(int(selected) - 5)
+			elif selected in ['0','1','2','3','4'] and move == 'down':
+				if count > (int(selected) + 5):
+					dict_selected['down'] = str(int(selected) + 5)
+			elif selected in ['1','2','3','4','6','7','8','9'] and move == 'left':
+				if count > (int(selected) - 1):
+					dict_selected['left'] = str(int(selected) - 1)
+			elif selected in ['0','1','2','3','5','6','7','8'] and move == 'right':
+				if count > (int(selected) + 1):
+					dict_selected['right'] = str(int(selected) + 1)
+			if not dict_selected['up']:
+				dict_selected['up'] = selected
+			if not dict_selected['down']:
+				dict_selected['down'] = selected
+			if not dict_selected['left']:
+				dict_selected['left'] = selected
+			if not dict_selected['right']:
+				dict_selected['right'] = selected
+	return dict_selected
 
 def moviedex(request):
 	selected = request.GET.get('selected', '')
@@ -174,17 +205,26 @@ def moviedex(request):
 	settings = getInfo.moviemon()
 	settings = settings.dump()
 	moviedex = settings.moviedex
-	if do_move_moviedex(settings, move):
+	count = 0
+	if not selected:
+		selected = '0'
+	dict_selected = do_move_moviedex(settings, move, selected)
+	if dict_selected:
 		settings.saveTMP()
-		return(redirect("/moviedex?selected=1"))
+	for moviemon in moviedex:
+		moviemon['id'] = str(count)
+		count += 1
+	a_href = dict_selected['selected']
+	if a_href not in ['0','1','2','3','4','5','6','7','8','9']:
+		a_href = '0'
 	controls_params = {
-		'left_href' : '/moviedex?move=left', 'up_href' : '/moviedex?move=up', 'down_href' : '/moviedex?move=down', 'right_href'  : '/moviedex?move=right',
+		'left_href' : '/moviedex?move=left&selected='+dict_selected['left'], 'up_href' : '/moviedex?move=up&selected='+dict_selected['up'], 'down_href' : '/moviedex?move=down&selected='+dict_selected['down'], 'right_href'  : '/moviedex?move=right&selected='+dict_selected['right'],
 		'left_title' : 'Move left', 'up_title' : 'Move up', 'down_title' : 'Move down', 'right_title' : 'Move right',
 		'select_href'   : '/worldmap', 'start_href'  : '',
 		'select_title'  : 'World Map', 'start_title' : '',
-		'a_href'   : '/moviedex/0', 'b_href'  : '',
+		'a_href'   : '/moviedex/'+a_href, 'b_href'  : '',
 		'a_title'  : 'Moviemon Details', 'b_title' : '',
-		'moviedex' : moviedex
+		'moviedex' : moviedex, 'selected' : selected
 		}
 	return render(request, "ex00/moviedex.html", controls_params)
 

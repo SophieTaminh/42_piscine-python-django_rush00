@@ -12,7 +12,7 @@ class moviemon:
 
     def __init__(self):
         "Ok on a initialise la classe moviemon"
-    
+
     def load(self, fileName):
         nomdossiersauvegarde = "saved_game/"
         nomfichier = fileName
@@ -20,7 +20,7 @@ class moviemon:
         self = pickle.load(open(nomSauvegarde, 'rb'))
         return self
 
-    
+
     def get_random_movie(self, moviemonListAvecDetailClean):
         print('HELLO', moviemonListAvecDetailClean)
         if len(moviemonListAvecDetailClean) > 1:
@@ -28,16 +28,16 @@ class moviemon:
         else:
             randomNumber = 0
         return moviemonListAvecDetailClean[randomNumber]
-    
+
     def load_default_settings(self):
         API_KEY = "87ac0cb0"
         moviemonList = settings.MOVIEMON_SETTINGS[0]['IMDB_title']
-        try : 
+        try :
             self.position = settings.MOVIEMON_SETTINGS[0]['position_start']
             self.grid_size = settings.MOVIEMON_SETTINGS[0]['grid_size']
             omdb.set_default('apikey', API_KEY)
             self.moviemonListAvecDetail = []
-            for index in moviemonList: 
+            for index in moviemonList:
                 res = omdb.get(title=moviemonList[index])
                 if (res):
                     self.moviemonListAvecDetail.append(res)
@@ -45,18 +45,19 @@ class moviemon:
             self.found = 0
             self.found_moviemon = ''
             self.moviedex = []
-            
+
         except Exception as e:
             print(e)
         return self
 
     def get_strength(self):
         return len(self.moviedex)
-    
+
     def get_movie(self, moviemonId):
         for moviemon in self.moviemonListAvecDetail:
             if (moviemon['imdb_id'] == moviemonId):
                 moviemonDetail = {
+                    'id' : moviemon['imdb_id'],
                     'nom' : moviemon['title'],
                     'poster' : moviemon['poster'],
                     'realisateur' : moviemon['director'],
@@ -89,4 +90,3 @@ class moviemon:
         nomdossiersauvegarde = "saved_game/"
         moviemongame = pickle.load(open(nomdossiersauvegarde + 'mypicklefile.txt', 'rb'))
         return moviemongame
-    

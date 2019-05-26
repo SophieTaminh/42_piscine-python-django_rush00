@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.accueil, name='accueil'),
     re_path(r'^$', views.accueil, name='accueil'),
     path('worldmap/', views.worldmap, name='worldmap'),
+    path('worldmap/<slug:id>', views.worldmap, name='worldmap'),
     path('battle/<slug:id>', views.battle, name='battle'),
     path('moviedex/', views.moviedex, name='moviedex'),
     path('moviedex/<slug:id>', views.moviedexDetail, name='moviedexDetail'),
