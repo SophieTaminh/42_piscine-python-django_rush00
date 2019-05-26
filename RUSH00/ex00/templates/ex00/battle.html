@@ -27,25 +27,23 @@ Battle
             {% endif %}
             {% if message == "Retente ta chance !"%}
                 <div style="color : green">{{message}}</div>
-                <div> A - Launch movieball </a></div> 
+                <div> A - Launch movieball </a></div>
             {% endif %}
             {% if message == "Tu n'as plus de movieballs"%}
             <div style="color : red">{{message}}</div>
             {% endif %}
             {% if message == ""%}
-            <div> A - Launch movieball </a></div> 
+            <div> A - Launch movieball </a></div>
             {% endif %}
             <div>B: Retour au World Map </div>
 
         </div>
     </div> <!-- ecran -->
-    
+
   {% include "ex00/controles.html" %}
 </div>
 
 </div> <!-- console-->
-        
+
 
 {% endblock %}
-
-

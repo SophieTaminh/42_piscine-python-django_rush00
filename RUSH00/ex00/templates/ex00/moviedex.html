@@ -20,7 +20,7 @@ SELECT : Lien vers la page Worldmap
        </div>
 <div>
 {% for moviemon in moviedex%}
-<img class="moviedex_item" src={{moviemon.poster}} alt="moviemon">
+<a href="/moviedex/{{moviedex.nom}}"><img class="moviedex_item" src={{moviemon.poster}} alt="moviemon" value={{moviedex.nom}}></a>
 {% endfor %}
 </div>
       </div>
@@ -29,5 +29,3 @@ SELECT : Lien vers la page Worldmap
 </div>
 
 {% endblock %}
-
-

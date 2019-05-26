@@ -133,6 +133,7 @@ def battle(request, id):
 				game.moviemonListAvecDetail = moviemonListAvecDetailClean
 				game.saveTMP()
 				message = "Tu as attrapé un moviemon !"
+				moviemonballTry = False
 			else :
 				if (game.nombreMovieballs > 0):
 					message = "Retente ta chance !"
@@ -151,7 +152,7 @@ def battle(request, id):
 		'a_title'  : '', 'b_title' : 'Retour au World Map',
 		"message" : message, "forceJoueur" : forceJoueur, "nombreMovieballs" : game.nombreMovieballs, "moviemonABattre" : moviemonABattre, "id" : id
 		}
-	if (message == "Tu as attrapé un moviemon !"):
+	if not moviemonABattre:
 		params['a_href'] = ''
 	return render(request, "ex00/battle.html", params)
 
@@ -238,7 +239,7 @@ def options_load_game(request):
 			slotc = True
 			gameSplit = game.split("_")
 			gameSplitC = gameSplit[1]
-	return render(request, "ex00/options_load_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC})
+	return render(request, "ex00/options_load_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC, "b_href" : "/", "b_title" : "menu", "a_href" : "/worldmap/", "a_title" : "load"})
 
 def options_save_game(request):
 	settings = getInfo.moviemon()
@@ -282,7 +283,7 @@ def options_save_game(request):
 			commandeEffacer = os.system("rm -f saved_game/slotc*")
 			tmp.save(fileName = saveName)
 	tmp.dump()
-	return render(request, "ex00/options_save_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC})
+	return render(request, "ex00/options_save_game.html", { "slota" : slota, "slotb" : slotb, "slotc" : slotc, "slotaNiveau" : gameSplitA, "slotbNiveau" : gameSplitB, "slotcNiveau" : gameSplitC, "b_href" : "/options/", "b_title" : "retour"})
 
 def handler404(request):
     return render(request, '404.html', status=404)
