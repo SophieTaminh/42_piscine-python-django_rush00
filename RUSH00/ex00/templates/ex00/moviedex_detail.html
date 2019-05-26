@@ -14,21 +14,24 @@ Detail
     <div id="ecran">
 	  <div id="moviedex_item_detail">
 		<div class="name">{{moviemonDetail.nom}}</div>
-<br>
-<img class="moviedex_item_detail" src={{moviemonDetail.poster}} alt="moviemon">
-<br>
-Réalisateur : {{moviemonDetail.realisateur}}
-<br>
-Année : {{moviemonDetail.annee}}
-<br>
-Rating : {{moviemonDetail.rating}}
-<br>
-Synopsis : {{moviemonDetail.synopsis}}
-<br>
-Acteurs : {{moviemonDetail.acteurs}}
-      </div>
-    </div>
+			<br>
+			<img class="moviedex_item_detail" src={{moviemonDetail.poster}} alt="moviemon">
+			<br>
+			Réalisateur : {{moviemonDetail.realisateur}}
+			<br>
+			Année : {{moviemonDetail.annee}}
+			 - 
+			Rating : {{moviemonDetail.rating}}
+			<br>
+			Synopsis : {{moviemonDetail.synopsis}}
+			<br>
+			Acteurs : {{moviemonDetail.acteurs}}
+      </div> <!-- moviedex_item_detail -->
+      <div id="info">
+			<div>B - Back</div>
+      	</div> <!-- info-->
+    </div> <!-- ecran-->
     {% include "ex00/controles.html" %}
-</div>
+</div> <!-- console-->
 
 {% endblock %}
