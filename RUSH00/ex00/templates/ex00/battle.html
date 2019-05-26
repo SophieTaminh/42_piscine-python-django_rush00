@@ -12,13 +12,16 @@ Battle
 {% block content %}
 <div id="console">
     <div id="ecran">
+
 		<div >Battle</div>
+
         <div class="info_battle">
             <div>Essayez de capturer le Moviemon que vous avez débusqué !</div>
             <div>Moviemon : {{moviemonABattre.nom}}, force : {{moviemonABattre.rating}}</div>
-        </div> <!-- info-->
+        </div> <!-- info battle-->
 
-         <div ><img id="affiche" src={{moviemonABattre.poster}} alt="moviemon" ></div>
+        <div ><img id="affiche" src={{moviemonABattre.poster}} alt="moviemon" ></div>
+
         <div class="info_battle">
             <div>Joueur : force {{forceJoueur}}, nombre de movieBalls en stock : {{nombreMovieballs}}</div>
             {% if message == "Tu as attrapé un moviemon !"%}
@@ -30,14 +33,14 @@ Battle
                 <div> A - Launch movieball </a></div> 
             {% endif %}
             {% if message == "Tu n'as plus de movieballs"%}
-            <div style="color : red">{{message}}</div>
+                <div style="color : red">{{message}}</div>
             {% endif %}
             {% if message == ""%}
-            <div> A - Launch movieball </a></div> 
+                <div> A - Launch movieball </a></div> 
             {% endif %}
             <div>B: Retour au World Map </div>
+        </div> <!-- info battle-->
 
-        </div>
     </div> <!-- ecran -->
     
   {% include "ex00/controles.html" %}

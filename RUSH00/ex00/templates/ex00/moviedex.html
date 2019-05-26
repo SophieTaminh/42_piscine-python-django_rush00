@@ -14,19 +14,19 @@ Moviedex
     <div id="ecran">
 	  <div id="moviedex_item">
 		<div class="name">Moviedex</div>
-		<div>
-A : Lien vers la page Detail du Moviemon sélectionne<br>
-SELECT : Lien vers la page Worldmap
-       </div>
-<div>
-{% for moviemon in moviedex%}
-<img class="moviedex_item" src={{moviemon.poster}} alt="moviemon">
-{% endfor %}
-</div>
-      </div>
-    </div>
+			<div>
+				{% for moviemon in moviedex%}
+					<img class="moviedex_item" src={{moviemon.poster}} alt="moviemon">
+				{% endfor %}
+			</div>
+		</div> <!--moviedex_item-->
+		<div id="info">
+			<div>A - More information</div>
+			<div>select - Back</div>
+      	</div> <!-- info-->
+    </div> <!-- ecran-->
     {% include "ex00/controles.html" %}
-</div>
+</div> <!-- console-->
 
 {% endblock %}
 
